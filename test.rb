@@ -5,6 +5,7 @@ require 'celluloid'
 require 'logger'
 
 logger                    = Logger.new("test.log")
+$CELLULOID_TEST           = true
 Celluloid.logger          = logger
 ActiveRecord::Base.logger = logger
 
@@ -32,6 +33,9 @@ end
 
 class Job
   include Celluloid
+
+  task_class TaskThread
+
   def perform(breaker)
     ActiveRecord::Base.connection_pool.with_connection do
       Util.report
@@ -73,3 +77,20 @@ Util.report
 puts
 puts "finished state:"
 Util.report
+
+reserved_thread_ids = ActiveRecord::Base.connection_pool.instance_variable_get(:@reserved_connections).keys
+dump = Celluloid.actor_system.stack_dump
+
+suspects = []
+Thread.list.select do |thread|
+  next unless reserved_thread_ids.include?(thread.object_id) && thread[:celluloid_actor]
+
+  actor = dump.actors.find {|a| a.id == thread[:celluloid_actor].object_id}
+  puts "Thread #{thread.inspect} holds a connection"
+  puts actor.dump
+
+  suspects << thread
+end
+
+require 'pry'
+binding.pry
