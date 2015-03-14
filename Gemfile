@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
-gem 'sucker_punch'
-gem 'activerecord', "4.1.9"
+gem 'celluloid', github: 'halorgium/celluloid', branch: 'ar-leak'
+gem 'activerecord', github: 'halorgium/rails', branch: 'ar-leak'
 gem 'pg'
 gem 'pry'
+gem 'pry-stack_explorer'

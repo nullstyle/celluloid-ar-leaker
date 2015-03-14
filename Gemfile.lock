@@ -1,5 +1,15 @@
-GEM
-  remote: https://rubygems.org/
+GIT
+  remote: git://github.com/halorgium/celluloid.git
+  revision: 3bce754bbec4bffd1dbca9c21803737ee0d63f35
+  branch: ar-leak
+  specs:
+    celluloid (0.16.0)
+      timers (~> 4.0.0)
+
+GIT
+  remote: git://github.com/halorgium/rails.git
+  revision: 857be80f1810b08a176889bcbc3a8acc338ec144
+  branch: ar-leak
   specs:
     activemodel (4.1.9)
       activesupport (= 4.1.9)
@@ -14,11 +24,16 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
     arel (5.0.1.20140414130214)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     builder (3.2.2)
-    celluloid (0.16.0)
-      timers (~> 4.0.0)
     coderay (1.1.0)
+    debug_inspector (0.0.2)
     hitimes (1.2.2)
     i18n (0.7.0)
     json (1.8.2)
@@ -29,9 +44,10 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-stack_explorer (0.4.9.1)
+      binding_of_caller (>= 0.7)
+      pry (>= 0.9.11)
     slop (3.6.0)
-    sucker_punch (1.4.0)
-      celluloid (~> 0.16.0)
     thread_safe (0.3.5)
     timers (4.0.1)
       hitimes
@@ -42,7 +58,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord (= 4.1.9)
+  activerecord!
+  celluloid!
   pg
   pry
-  sucker_punch
+  pry-stack_explorer
