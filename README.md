@@ -4,8 +4,11 @@ This script (test.rb) illustrates a repro case that leaks ActiveRecord connectio
 
 A sample run (the "reserved" output lines shows the connection_ids that are still reserved):
 
+You need to bundle to get the modified celluloid and activerecord libraries.
+You can change the `$POOLING` flag to run in normal celluloid mode.
+
 ```
-➜  leaker git:(master) ✗ ruby test.rb
+➜  leaker git:(master) ✗ bundle exec ruby test.rb
 
 initial state:
 reserved: [70250595245040]
